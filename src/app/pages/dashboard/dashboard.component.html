@@ -1,0 +1,10 @@
+<div>
+  <div *ngIf="(webhooks$ | async).length; else placeholder" class="webhooks-list">
+    <div *ngFor="let webhook of (webhooks$ | async) " class="mb-2">
+      <webhook-row [webhook]="webhook"></webhook-row>
+    </div>
+  </div>
+  <ng-template #placeholder>
+    <webhook-registration-placeholder></webhook-registration-placeholder>
+  </ng-template>
+</div>

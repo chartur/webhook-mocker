@@ -1,0 +1,28 @@
+<div class="webhook-container" [class.shown]="visibility">
+  <div class="card-header" (click)="toggleWebhook()">
+    <div class="d-flex justify-content-start align-items-center">
+      <button class="btn btn-sm mr-2" [ngClass]="methodColors[webhook.method]">{{ webhook.method }}</button>
+      <code>{{ webhook.path }}</code>
+    </div>
+  </div>
+  <div class="panel-collapse collapse in show">
+    <div class="panel-body card-block card-body">
+      <div class="row mt-3">
+        <div class="col-8">
+          <h6>Request Body</h6>
+          <div>
+            <pre>
+              <code class="language-{{webhook.contentType}}" [textContent]="webhook.body"></code>
+            </pre>
+          </div>
+        </div>
+        <div class="col-4">
+          <h6>Response Body</h6>
+          <pre>
+            <code class="language-text" style="white-space: break-spaces" [textContent]="webhook.response"></code>
+          </pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

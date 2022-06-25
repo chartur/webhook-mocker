@@ -1,0 +1,18 @@
+<div>
+  <div [formGroup]="form" class="mt-5 d-flex justify-content-center align-items-center">
+    <div class="url-container">
+      <div class="input-group mb-2 mr-sm-2 input-group-lg">
+        <input formControlName="subdomain" type="text" class="form-control form-control-lg" id="inlineFormInputGroupUsername2" placeholder="Subdomain">
+        <div class="input-group-append">
+          <div class="input-group-text">.{{ host }}</div>
+        </div>
+      </div>
+      <div class="text-center mt-4">
+        <button (click)="generate()" [disabled]="form.invalid" class="btn btn-success">
+          <fa-icon [icon]="generateIcon"></fa-icon>
+          <span class="ml-2">Generate URL</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

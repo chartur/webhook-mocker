@@ -1,0 +1,38 @@
+<div class="col-sm-12 text-center">
+  <div class="row text-center">
+    <div class="col-md-8 offset-2"><br>
+      <h2>Looks Awesome!</h2>
+      <h5>
+        The following endpoint is all set up. Use it in your code as base URL and send a
+        request. You can inspect these requests here and build rules to mock responses.
+      </h5><code id="endpointUrl"><b>{{protocol}}//{{ config.subdomain }}.{{ path }}</b></code>
+      <button data-clipboard-target="#endpointUrl" title="Click to copy!" data-toggle="tooltip" class="btn btn-xs btn-link">
+        <fa-icon class="copy-icon" [icon]="copyIcon"></fa-icon>
+      </button>
+    </div>
+  </div>
+  <div class="text-center">
+    <br>
+    For example, run the following command in shell/terminal to get started.
+    <br>
+    <code id="sampleCommand">
+      curl -v -X GET '{{protocol}}//{{ config.subdomain }}.{{ path }}/my/api/path' -H 'some-header: some-value'
+    </code>
+
+    <button class="btn btn-xs btn-link">
+      <fa-icon class="copy-icon" [icon]="copyIcon"></fa-icon>
+    </button>
+    <br>
+    <i>(or <a href="{{protocol}}//{{ config.subdomain }}.{{ path }}" target="_blank">click here</a> to simulate in web-browser)</i>
+    <br>
+    <br>
+    <small>
+      <b>
+        <i>
+          * Note: This endpoint is public and anyone having access to this page can view
+          requests. Consider upgrading to have a private endpoint.
+        </i>
+      </b>
+    </small>
+  </div>
+</div>
