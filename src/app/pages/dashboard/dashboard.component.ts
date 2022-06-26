@@ -1,4 +1,4 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, OnDestroy, OnInit} from "@angular/core";
 import {MyConfigService} from "../../services/my-config.service";
 import {SocketService} from "../../services/socket.service";
 import {WebhooksService} from "../../services/webhooks.service";
@@ -13,7 +13,7 @@ import {Webhook} from "../../models/webhook";
   ]
 })
 
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
   public host: string = window.location.host;
   public webhooks$: Observable<Array<Webhook>>
 
@@ -26,6 +26,11 @@ export class DashboardComponent implements OnInit {
 
   ngOnInit() {
     this.init();
+    this.webhooksService.startInterval();
+  }
+
+  ngOnDestroy() {
+    this.webhooksService.clearTimer();
   }
 
   private init(): void {

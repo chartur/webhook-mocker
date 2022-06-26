@@ -1,6 +1,9 @@
 import {AfterViewInit, Component, Input, OnDestroy, OnInit} from "@angular/core";
 import {Webhook} from "../../models/webhook";
-import {interval} from "rxjs";
+import {interval, Subscription} from "rxjs";
+import TimeAgo from 'javascript-time-ago'
+import en from 'javascript-time-ago/locale/en'
+import {WebhooksService} from "../../services/webhooks.service";
 
 @Component({
   selector: 'webhook-row',
@@ -9,7 +12,7 @@ import {interval} from "rxjs";
     './webhook-row.component.scss'
   ]
 })
-export class WebhookRowComponent implements AfterViewInit {
+export class WebhookRowComponent implements OnInit, AfterViewInit, OnDestroy {
   public methodColors = {
     GET: "btn-primary",
     POST: "btn-success",
@@ -22,51 +25,32 @@ export class WebhookRowComponent implements AfterViewInit {
     PATCH: "btn-warning",
   }
   public visibility: boolean = false;
-  public timeAgo: string = "";
+  public timeAgo: string | [string, number?] = "";
+  private subscription: Subscription;
   @Input('webhook') webhook: Webhook
 
+  constructor(
+    private webhooksService: WebhooksService
+  ) {
+  }
+
   ngAfterViewInit() {
-    console.log(this.webhook);
     (window as any).hljs.highlightAll();
   }
 
   ngOnInit() {
-    this.timeAgo = this.timeSince();
-    const timeSubscription = interval( 60000)
-      .subscribe(() => {
-        this.timeSince();
-      });
+    TimeAgo.addDefaultLocale(en)
+    const timeAgo = new TimeAgo('en-US')
+    this.subscription = this.webhooksService.timer$.subscribe(() => {
+      this.timeAgo = timeAgo.format(new Date(this.webhook.date));
+    })
+  }
+
+  ngOnDestroy() {
+    this.subscription?.unsubscribe();
   }
 
   public toggleWebhook(): void {
     this.visibility = !this.visibility
-  }
-
-  private timeSince() {
-    const date = this.webhook.date;
-    const seconds = Math.floor((new Date() - date) / 1000);
-    let interval = seconds / 31536000;
-
-    if (interval > 1) {
-      return Math.floor(interval) + " years";
-    }
-
-    interval = seconds / 2592000;
-    if (interval > 1) {
-      return Math.floor(interval) + " months";
-    }
-    interval = seconds / 86400;
-    if (interval > 1) {
-      return Math.floor(interval) + " days";
-    }
-    interval = seconds / 3600;
-    if (interval > 1) {
-      return Math.floor(interval) + " hours";
-    }
-    interval = seconds / 60;
-    if (interval > 1) {
-      return Math.floor(interval) + " minutes";
-    }
-    return Math.floor(seconds) + " seconds";
   }
 }

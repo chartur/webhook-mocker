@@ -7,7 +7,7 @@ export interface Webhook {
   contentType?: "json" | "text" | "xml" | "html",
   queryParams: Record<string, string>,
   response: string,
-  date: Date
+  date: string,
 }
 
 

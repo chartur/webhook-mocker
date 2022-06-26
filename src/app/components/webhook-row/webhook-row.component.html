@@ -2,7 +2,10 @@
   <div class="card-header" (click)="toggleWebhook()">
     <div class="d-flex justify-content-start align-items-center">
       <button class="btn btn-sm mr-2" [ngClass]="methodColors[webhook.method]">{{ webhook.method }}</button>
-      <code>{{ webhook.path }}</code>
+      <div class="flex-grow-1">
+        <code>{{ webhook.path }}</code>
+      </div>
+      <small>{{ timeAgo }}</small>
     </div>
   </div>
   <div class="panel-collapse collapse in show">
