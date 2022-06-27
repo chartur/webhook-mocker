@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit {
     this.form = new FormGroup({
       subdomain: new FormControl('', [
         Validators.required,
-        Validators.min(5),
+        Validators.minLength(6),
         Validators.pattern(this.subdomainReg)
       ])
     })
