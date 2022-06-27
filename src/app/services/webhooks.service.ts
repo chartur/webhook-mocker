@@ -1,6 +1,8 @@
 import {Injectable} from "@angular/core";
 import {BehaviorSubject, Observable} from "rxjs";
 import {Webhook} from "../models/webhook";
+import TimeAgo from "javascript-time-ago";
+import en from 'javascript-time-ago/locale/en'
 
 @Injectable({
   providedIn: "root"
@@ -12,6 +14,10 @@ export class WebhooksService {
   private intervalSubject: BehaviorSubject<null> = new BehaviorSubject<null>(null);
   public readonly timer$: Observable<null> = this.intervalSubject.asObservable();
   private interval: any;
+
+  constructor() {
+    TimeAgo.addDefaultLocale(en);
+  }
 
   public add(webhook: Webhook): void {
     this._webhooks.add(webhook);

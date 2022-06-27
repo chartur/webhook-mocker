@@ -3,7 +3,6 @@ const http = require("http");
 const socketIo = require("socket.io");
 const bodyParser = require('body-parser')
 const cors = require('cors');
-const url = require('url');
 const subdomain = require('express-subdomain');
 const subdomainRouter = require("./routes/subdomain");
 const app = express();
@@ -24,18 +23,14 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.get("/", (req, res, next) => {
-  console.log("gexec")
-  if(req.subdomain) {
-    return next()
-  }
-  app.use(express.static('./dist'));
-  res.sendFile("index.html", {root: "./dist"});
-})
 app.use(subdomain("*", subdomainRouter))
 io.on("connection", (socket) => {
   const subdomain = socket.handshake.query.subdomain;
   socket.join(subdomain);
 });
 
-httpServer.listen(3000);
+const port = process.env.PORT || 3000;
+
+httpServer.listen(port, () => {
+  console.log("backend successfully ran on " + port)
+});

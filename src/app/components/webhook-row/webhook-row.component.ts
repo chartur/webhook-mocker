@@ -1,8 +1,7 @@
 import {AfterViewInit, Component, Input, OnDestroy, OnInit} from "@angular/core";
 import {Webhook} from "../../models/webhook";
-import {interval, Subscription} from "rxjs";
+import {Subscription} from "rxjs";
 import TimeAgo from 'javascript-time-ago'
-import en from 'javascript-time-ago/locale/en'
 import {WebhooksService} from "../../services/webhooks.service";
 
 @Component({
@@ -39,7 +38,6 @@ export class WebhookRowComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
-    TimeAgo.addDefaultLocale(en)
     const timeAgo = new TimeAgo('en-US')
     this.subscription = this.webhooksService.timer$.subscribe(() => {
       this.timeAgo = timeAgo.format(new Date(this.webhook.date));

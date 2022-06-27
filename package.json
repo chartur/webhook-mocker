@@ -3,11 +3,13 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "npm run run:live | npm run run:live-server",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "start:server": "nodemon server/index.js"
+    "start:server": "nodemon server/index.js",
+    "run:live": "node run.js",
+    "run:live-server": "node server/index.js"
   },
   "private": true,
   "dependencies": {
