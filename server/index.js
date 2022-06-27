@@ -29,7 +29,7 @@ io.on("connection", (socket) => {
   socket.join(subdomain);
 });
 
-const port = process.env.PORT || 3000;
+const port = process.env.API_PORT || 3000;
 
 httpServer.listen(port, () => {
   console.log("backend successfully ran on " + port)

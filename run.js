@@ -3,14 +3,14 @@ const path = require("path");
 const app = express();
 
 app.use(express.static(path.join(__dirname, 'dist')))
-const port = process.env.PORT || 4200;
+const port = process.env.APP_PORT || 4200;
 
 app.get("/", (req) => {
   res.sendFile("index.html")
 })
 
 app.all("*", (req, res) => {
-  res.status(404).send()
+  res.redirect("/")
 })
 
 app.listen(port, () => {
