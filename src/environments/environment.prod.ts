@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  apiHost: "webook-mocker-api.herokuapp.com",
-  socketUrl: "wss://webook-mocker-api.herokuapp.com/"
+  apiHost: "webhook-mocker.com",
+  socketUrl: "wss://webhook-mocker.com/"
 };
