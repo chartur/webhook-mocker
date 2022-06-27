@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import { io, Socket } from "socket.io-client";
-import endpoints from "../../environments/endpoints";
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +13,7 @@ export class SocketService {
   }
 
   public connect(query: Record<string, string>): void {
-    this.socketIo = io(endpoints.socket.url, {
+    this.socketIo = io(environment.socketUrl, {
       transports: ["websocket"],
       query
     })
