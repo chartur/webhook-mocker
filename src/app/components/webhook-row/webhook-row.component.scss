@@ -27,8 +27,13 @@ pre{
   white-space:normal;
 }
 
-pre code{
+pre code {
   white-space:pre;
+  height: 300px;
+}
+
+.white-spec {
+  white-space: break-spaces!important;
 }
 
 h6 {
