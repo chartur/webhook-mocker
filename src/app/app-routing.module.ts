@@ -6,10 +6,10 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    loadChildren: () => import("./pages/home/home.module").then(m => m.HomeModule)
+    redirectTo: "/cabinet"
   },
   {
-    path: 'dashboard',
+    path: 'cabinet',
     canActivate: [RegisterGuard],
     loadChildren: () => import("./pages/dashboard/dashboard.module").then(m => m.DashboardModule)
   }
