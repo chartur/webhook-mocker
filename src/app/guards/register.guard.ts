@@ -16,15 +16,14 @@ export class RegisterGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
-  ): Observable<boolean> {
+  ): boolean {
+    const subdomain = route.queryParams['subdomain'];
+    if(!subdomain) {
+      window.location.href = environment.homeSiteUrl;
+      return false;
+    }
+
     this.myConfigService.setSubdomain(route.queryParams['subdomain'])
-    return this.myConfigService.config$.pipe(
-      map(config => !!config.subdomain),
-      tap(hasConfig => {
-        if(!hasConfig) {
-          window.location.href = environment.homeSiteUrl;
-        }
-      })
-    )
+    return true;
   }
 }
