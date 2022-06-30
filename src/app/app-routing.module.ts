@@ -10,7 +10,7 @@ const routes: Routes = [
   },
   {
     path: 'cabinet',
-    canActivate: [RegisterGuard],
+    // canActivate: [RegisterGuard],
     loadChildren: () => import("./pages/dashboard/dashboard.module").then(m => m.DashboardModule)
   }
 ];

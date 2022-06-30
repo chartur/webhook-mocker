@@ -4,6 +4,8 @@ import {SocketService} from "../../services/socket.service";
 import {WebhooksService} from "../../services/webhooks.service";
 import {map, Observable, pipe, take} from "rxjs";
 import {Webhook} from "../../models/webhook";
+import {ActivatedRoute} from "@angular/router";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'webhook-home-page',
@@ -20,11 +22,18 @@ export class DashboardComponent implements OnInit, OnDestroy {
   constructor(
     private myConfigService: MyConfigService,
     private socketService: SocketService,
-    private webhooksService: WebhooksService
+    private webhooksService: WebhooksService,
+    public route: ActivatedRoute
   ) {
   }
 
   ngOnInit() {
+    const subdomain = this.route.snapshot.queryParams['subdomain'];
+    if(!subdomain) {
+      window.location.href = environment.homeSiteUrl;
+      return
+    }
+
     this.init();
     this.webhooksService.startInterval();
   }
