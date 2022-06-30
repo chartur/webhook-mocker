@@ -28,11 +28,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    const subdomain = this.route.snapshot.queryParams['subdomain'];
-    if(!subdomain) {
-      window.location.href = environment.homeSiteUrl;
-      return
-    }
+    // const subdomain = this.route.snapshot.queryParams['subdomain'];
+    // if(!subdomain) {
+    //   window.location.href = environment.homeSiteUrl;
+    //   return
+    // }
 
     this.init();
     this.webhooksService.startInterval();
